@@ -24,7 +24,8 @@ $query =
         end_time, 
         short_description, 
         long_description, 
-        image) 
+        image,
+        image_description) 
     VALUES
         ('3',
         '4', 
@@ -33,7 +34,8 @@ $query =
         '2022-11-05T14:59:00', 
         'I''m going on vacations!',
         'Kid is throwing a party at my place. I don''t wanna be there at that time- perfect time for a vacations!', 
-        '$image_dog_vacations_content'),
+        '$image_dog_vacations_content',
+        'dog sitting in a suitcase'),
         ('3',
         '1', 
         'Time with John', 
@@ -41,7 +43,8 @@ $query =
         '2022-11-01T16:00:00', 
         'I''m spending time with John.',
         'John is coming to my flat. I''ll spend some time with him and teach him giving a hand. Also I''ll eat some snacks during that :)', 
-        '$image_dog_human_content'),
+        '$image_dog_human_content',
+        'dog giving paw to the man'),
         ('4',
         '4', 
         'Party Preparation', 
@@ -49,7 +52,8 @@ $query =
         '2022-11-03T13:00:00', 
         'Bath, shave before my second birthday.',
         'I need to look like a god on my party. So I''ll take a shower, shave myself, use perfumes', 
-        '$image_baby_shaving_content'),
+        '$image_baby_shaving_content',
+        'baby shaving himself'),
         ('4',
         '3', 
         'Party', 
@@ -57,7 +61,8 @@ $query =
         '2022-11-03T17:00:00', 
         'Party time!',
         'Everyone is invited in the neighbor. For sure I''ll receive nice presents.', 
-        '$image_baby_party_content'),
+        '$image_baby_party_content',
+        'baby having a party'),
         ('4',
         '5', 
         'Cleaning', 
@@ -65,7 +70,8 @@ $query =
         '2022-11-03T19:00:00', 
         'Cleaning after the party.',
         'Poor me that I need to cleanup this whole mess.', 
-        '$image_baby_cleaning_content'),
+        '$image_baby_cleaning_content',
+        'baby washing plate in a sink'),
         ('5',
         '5', 
         'Face Yoga', 
@@ -73,7 +79,8 @@ $query =
         '2022-11-03T17:00:00', 
         'I''m attending yoga-face classes.',
         'My face will look beautiful after that classes. ( even better than now :)  )', 
-        '$image_woman_content');";
+        '$image_woman_content',
+        'woman with odd face expression');";
 
 $stmt = $db->prepare($query);
 $stmt->execute();

@@ -3,18 +3,19 @@
 header('Access-Control-Allow-Origin: *');
 header('Consent-Type: application/json');
 
-include_once '../../config/Database.php';
-include_once '../../models/Users.php';
+include_once '../../../config/Database.php';
+include_once '../../../models/Users.php';
 
 $database = new Database();
 $db = $database->connect();
 
-$result = $users->read();
-// debug in home what's the result
+$users = new Users($db);
+
+$result = $users->read_without_password();
 
 $num_of_rows = $result->rowCount();
 
-if($num > 0)
+if($num_of_rows > 0)
 {
     $users_arr = array();
     $users_arr['data'] = array();
@@ -25,8 +26,7 @@ if($num > 0)
 
         $user_item = array(
             'id' => $id,
-            'username' => $username,
-            'password' => $password
+            'username' => $username
         );
 
         array_push($users_arr['data'], $user_item);

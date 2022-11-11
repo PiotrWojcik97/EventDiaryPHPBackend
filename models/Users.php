@@ -3,7 +3,6 @@
 class Users
 {
     private $conn;
-    private $table = 'users';
 
     public $id;
     public $username;
@@ -17,8 +16,18 @@ class Users
     public function read()
     {
         $query = 
-            'SELECT u.id, u.username, u.password
-            FROM' . $this->table . ' as u';
+            "SELECT id, username, password FROM users;";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        return $stmt;
+    }
+    
+    public function read_without_password()
+    {
+        $query = 
+            "SELECT id, username FROM users;";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

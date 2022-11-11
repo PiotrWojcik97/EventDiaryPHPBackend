@@ -19,6 +19,7 @@ $query =
     short_description TEXT,
     long_description TEXT,
     image LONGBLOB,
+    image_description VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (type_id) REFERENCES types(id) );';
