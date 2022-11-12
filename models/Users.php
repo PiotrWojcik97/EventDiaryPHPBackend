@@ -34,4 +34,21 @@ class Users
 
         return $stmt;
     }
+
+    public function read_user($username)
+    {
+        $query = 
+            "SELECT username, password FROM users
+            WHERE username= :username
+            LIMIT 0,1;";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->username = $row['username']; 
+        $this->password = $row['password']; 
+    }
 }

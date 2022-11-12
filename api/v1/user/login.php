@@ -1,15 +1,5 @@
 <?php
 
-// header('Access-Control-Allow-Origin: *');
-// header('Consent-Type: application/json');
-// header('Access-Control-Allow-Methods: DELETE');
-// header('Access-Control-Allow-Headers:
-//     Access-Control-Allow-Headers,
-//     Consent-Type,
-//     Access-Control-Allow-Methods,
-//     Authorization,
-//     X-Requested-With');
-
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
@@ -20,7 +10,7 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE");         
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");         
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
         header("Access-Control-Allow-Headers:        {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
@@ -29,24 +19,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 include_once '../../../config/Database.php';
-include_once '../../../models/Events.php';
+include_once '../../../models/Users.php';
 
 $database = new Database();
 $db = $database->connect();
 
-$event = new Events($db);
+$user = new Users($db);
 
-$event->id = isset($_GET['id']) ? $_GET['id'] : die();
+$data = json_decode(file_get_contents("php://input"));
 
-if($event->delete())
+$user->read_user($data->username);
+
+if( $data->username == $user->username &&
+    $data->password == $user->password)
 {
-    echo json_encode(
-        array('message' => 'Event deleted')
+    $reply = array(
+        'res' => 'OK',
     );
 }
 else
 {
-    echo json_encode(
-        array('message' => 'Event not deleted')
+    $reply = array(
+        'res' => 'NOK',
     );
 }
+
+print_r(json_encode($reply));
