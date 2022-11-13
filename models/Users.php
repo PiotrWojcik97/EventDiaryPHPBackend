@@ -23,6 +23,27 @@ class Users
 
         return $stmt;
     }
+
+    public function update()
+    {
+        $query = 
+            "UPDATE users SET
+                password = :password
+            WHERE
+                username = :username;";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':password', $this->password);
+        $stmt->bindParam(':username', $this->username);
+        
+        if($stmt->execute()) {
+            return true;
+        }
+        
+        printf("Error: %s.\n", $stmt->error);
+        
+        return false;
+    }
     
     public function read_without_password()
     {
