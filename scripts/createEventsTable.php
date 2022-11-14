@@ -14,8 +14,6 @@ $query =
     user_id int NOT NULL,
     type_id int NOT NULL,
     name VARCHAR(255) NOT NULL,
-    start_time DATETIME NOT NULL,
-    end_time DATETIME NOT NULL,
     short_description TEXT,
     long_description TEXT,
     image LONGBLOB,

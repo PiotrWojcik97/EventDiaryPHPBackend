@@ -8,8 +8,10 @@ include_once './createDatabase.php';
 include_once './createUsersTable.php';
 include_once './createTypesTable.php';
 include_once './createEventsTable.php';
+include_once './createEventsTimeTable.php';
 include_once './insertUsersData.php';
 include_once './insertTypesData.php';
 include_once './insertEventsData.php';
+include_once './insertEventsTimeData.php';
 
 echo 'success';

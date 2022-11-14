@@ -8,8 +8,6 @@ class Events
     public $user_id; 
     public $type_id; 
     public $name; 
-    public $start_time; 
-    public $end_time; 
     public $short_description; 
     public $long_description; 
     public $image;
@@ -40,7 +38,56 @@ class Events
 
         return $stmt;
     }
+
+    public function read_month($month, $year)
+    {
+        $next_month = $month + 1;
+        $next_year = $year;
+        if($next_month > 12)
+        {
+            $next_month = 1;
+            $next_year += 1;
+        }
+
+        $query = 
+            "SELECT
+                e.id,
+                e.user_id, 
+                e.type_id,
+                t.start_time,
+                t.end_time,
+                e.name,
+                e.short_description,
+                e.long_description,
+                e.image_description
+            FROM events e
+            INNER JOIN events_time t
+            ON e.id = t.event_id
+            WHERE t.start_time >= '$year-$month-01' and 
+                  t.start_time < '$next_year-$next_month-01'
+            ;";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+
+        return $stmt;
+    }
     
+    public function read_last_id()
+    {
+        $query = 
+            "SELECT LAST_INSERT_ID();";
+        
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row['LAST_INSERT_ID()'];
+    }
+
     public function read_single()
     {
         $query = 
@@ -49,8 +96,6 @@ class Events
                 user_id, 
                 type_id, 
                 name, 
-                start_time, 
-                end_time, 
                 short_description, 
                 long_description
             FROM events
@@ -66,22 +111,17 @@ class Events
         $this->user_id = $row['user_id']; 
         $this->type_id = $row['type_id']; 
         $this->name = $row['name']; 
-        $this->start_time = $row['start_time']; 
-        $this->end_time = $row['end_time']; 
         $this->short_description = $row['short_description']; 
         $this->long_description = $row['long_description']; 
     }
 
     public function create_one()
     {
-
         $query = 
             "INSERT INTO events SET
                 user_id = :user_id, 
                 type_id = :type_id, 
                 name = :name, 
-                start_time = :start_time, 
-                end_time = :end_time, 
                 short_description = :short_description, 
                 long_description = :long_description;";
 
@@ -92,8 +132,6 @@ class Events
         $stmt->bindParam(':user_id', $this->user_id); 
         $stmt->bindParam(':type_id', $this->type_id); 
         $stmt->bindParam(':name', $this->name); 
-        $stmt->bindParam(':start_time', $this->start_time); 
-        $stmt->bindParam(':end_time', $this->end_time); 
         $stmt->bindParam(':short_description', $this->short_description); 
         $stmt->bindParam(':long_description', $this->long_description);
 
@@ -114,8 +152,6 @@ class Events
                 user_id = :user_id, 
                 type_id = :type_id, 
                 name = :name, 
-                start_time = :start_time, 
-                end_time = :end_time, 
                 short_description = :short_description, 
                 long_description = :long_description
             WHERE
@@ -129,8 +165,6 @@ class Events
         $stmt->bindParam(':user_id', $this->user_id); 
         $stmt->bindParam(':type_id', $this->type_id); 
         $stmt->bindParam(':name', $this->name); 
-        $stmt->bindParam(':start_time', $this->start_time); 
-        $stmt->bindParam(':end_time', $this->end_time); 
         $stmt->bindParam(':short_description', $this->short_description); 
         $stmt->bindParam(':long_description', $this->long_description);
 
