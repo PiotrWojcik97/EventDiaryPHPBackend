@@ -40,7 +40,6 @@ $event->image_description = $data->image_description;
 
 if($event->update())
 {
-    echo "SUCCESS", PHP_EOL;
     $events_time->event_id = $event->id;
 
     if($events_time->delete())
@@ -56,18 +55,7 @@ if($event->update())
             $events_time->start_time = $data->start_time;
             $events_time->end_time = $data->end_time;
             
-            if($events_time->create_one())
-            {
-                echo json_encode(
-                    array('message' => 'Event created')
-                );
-            }
-            else
-            {
-                echo json_encode(
-                    array('message' => 'Event partially created')
-                );
-            }
+            $events_time->create_one();
         }
         // else if event happens during multiple months, chop dates and save it per month.
         else
