@@ -1,15 +1,5 @@
 <?php
 
-// header('Access-Control-Allow-Origin: *');
-// header('Consent-Type: application/json');
-// header('Access-Control-Allow-Methods: DELETE');
-// header('Access-Control-Allow-Headers:
-//     Access-Control-Allow-Headers,
-//     Consent-Type,
-//     Access-Control-Allow-Methods,
-//     Authorization,
-//     X-Requested-With');
-
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
@@ -30,19 +20,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 include_once '../../../config/Database.php';
 include_once '../../../models/Events.php';
+include_once '../../../models/EventsTime.php';
 
 $database = new Database();
 $db = $database->connect();
 
 $event = new Events($db);
+$event_time = new EventsTime($db);
 
 $event->id = isset($_GET['id']) ? $_GET['id'] : die();
+$event_time->event_id = isset($_GET['id']) ? $_GET['id'] : die();
 
-if($event->delete())
+if($event_time->delete())
 {
-    echo json_encode(
-        array('message' => 'Event deleted')
-    );
+    if($event->delete())
+    {
+        echo json_encode(
+            array('message' => 'Event deleted')
+        );
+    }
+    else
+    {
+        echo json_encode(
+            array('message' => 'Event partially deleted')
+        );
+    }
 }
 else
 {

@@ -30,7 +30,8 @@ class Events
                 start_time, 
                 end_time, 
                 short_description, 
-                long_description
+                long_description,
+                image_description
             FROM events;";
 
         $stmt = $this->conn->prepare($query);
@@ -97,7 +98,8 @@ class Events
                 type_id, 
                 name, 
                 short_description, 
-                long_description
+                long_description,
+                image_description
             FROM events
             WHERE id = ?
             LIMIT 0,1;";
@@ -113,6 +115,7 @@ class Events
         $this->name = $row['name']; 
         $this->short_description = $row['short_description']; 
         $this->long_description = $row['long_description']; 
+        $this->image_description = $row['image_description']; 
     }
 
     public function create_one()
@@ -123,7 +126,8 @@ class Events
                 type_id = :type_id, 
                 name = :name, 
                 short_description = :short_description, 
-                long_description = :long_description;";
+                long_description = :long_description,
+                image_description = :image_description;";
 
         $stmt = $this->conn->prepare($query);
 
@@ -134,6 +138,7 @@ class Events
         $stmt->bindParam(':name', $this->name); 
         $stmt->bindParam(':short_description', $this->short_description); 
         $stmt->bindParam(':long_description', $this->long_description);
+        $stmt->bindParam(':image_description', $this->image_description);
 
         if($stmt->execute()) {
             return true;
@@ -153,7 +158,8 @@ class Events
                 type_id = :type_id, 
                 name = :name, 
                 short_description = :short_description, 
-                long_description = :long_description
+                long_description = :long_description,
+                image_description = :image_description
             WHERE
                 id = :id;";
 
@@ -167,6 +173,7 @@ class Events
         $stmt->bindParam(':name', $this->name); 
         $stmt->bindParam(':short_description', $this->short_description); 
         $stmt->bindParam(':long_description', $this->long_description);
+        $stmt->bindParam(':image_description', $this->image_description);
 
         if($stmt->execute()) {
             return true;

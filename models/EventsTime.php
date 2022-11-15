@@ -59,4 +59,22 @@ class EventsTime
         return false;
     }
 
+    public function delete()
+    {
+        $query = 
+            "DELETE FROM events_time WHERE
+                event_id = :event_id;";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':event_id', $this->event_id);
+        
+        if($stmt->execute()) {
+            return true;
+        }
+
+        printf("Error: %s.\n", $stmt->error);
+        
+        return false;
+    }
+
 }
