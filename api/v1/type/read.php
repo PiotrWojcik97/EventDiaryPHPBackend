@@ -41,7 +41,8 @@ if($num_of_rows > 0)
 
         $type_item = array(
             'id' => $id,
-            'name' => $name
+            'name' => $name,
+            'color' => $color
         );
 
         array_push($types_arr['data'], $type_item);

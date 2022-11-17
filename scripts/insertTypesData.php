@@ -9,13 +9,13 @@ $database = new Database();
 $db = $database->connect();
 
 $query =
-    'INSERT INTO types (name) 
+    "INSERT INTO types (color, name) 
     VALUES
-        ( \'meeting\'), 
-        ( \'training\'),
-        ( \'party\'),
-        ( \'leisure\'),
-        ( \'household duties\');';
+        ('#A79AFF9F', 'meeting'), 
+        ('#FFBEBC9F', 'training'),
+        ('#FFF5BA9F', 'party'),
+        ('#85E3FF9F', 'leisure'),
+        ('#AFF8DB9F', 'household duties');";
 
 $stmt = $db->prepare($query);
 $stmt->execute();

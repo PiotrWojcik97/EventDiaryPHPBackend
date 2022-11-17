@@ -6,6 +6,7 @@ class Types
 
     public $id;
     public $name;
+    public $color;
 
     public function __construct($db)
     {
@@ -15,7 +16,7 @@ class Types
     public function read()
     {
         $query = 
-            "SELECT id, name FROM types;";
+            "SELECT id, name, color FROM types;";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -28,13 +29,15 @@ class Types
 
         $query = 
             "INSERT INTO types SET
-                name = :name;";
+                name = :name,
+                color = :color;";
 
         $stmt = $this->conn->prepare($query);
 
         // should be validation here (stripping of html)
 
         $stmt->bindParam(':name', $this->name); 
+        $stmt->bindParam(':color', $this->color); 
 
         if($stmt->execute()) {
             return true;
@@ -68,7 +71,8 @@ class Types
         $query = 
             "SELECT
                 id,
-                name
+                name,
+                color
             FROM types
             WHERE id = ?
             LIMIT 0,1;";
@@ -81,6 +85,7 @@ class Types
 
         $this->id = $row['id']; 
         $this->name = $row['name']; 
+        $this->color = $row['color']; 
     }
 
     public function update()
@@ -88,6 +93,7 @@ class Types
         $query = 
             "UPDATE types SET 
                 name = :name
+                color = :color
             WHERE
                 id = :id;";
 
@@ -97,6 +103,7 @@ class Types
 
         $stmt->bindParam(':id', $this->id);
         $stmt->bindParam(':name', $this->name); 
+        $stmt->bindParam(':color', $this->color); 
 
         if($stmt->execute()) {
             return true;

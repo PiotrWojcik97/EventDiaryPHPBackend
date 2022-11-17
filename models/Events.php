@@ -40,6 +40,20 @@ class Events
         return $stmt;
     }
 
+    public function read_id_by_type_id()
+    {
+        $query = 
+            "SELECT
+                id
+            FROM events
+            WHERE type_id = :type_id;";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':type_id', $this->type_id); 
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function read_month($month, $year)
     {
         $next_month = $month + 1;

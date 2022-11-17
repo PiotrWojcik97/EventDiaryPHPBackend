@@ -30,6 +30,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 $type->id = $data->id;
 $type->name = $data->name; 
+$type->color = $data->color; 
 
 if($type->update())
 {

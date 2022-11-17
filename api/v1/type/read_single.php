@@ -36,7 +36,8 @@ $type->read_single();
 
 $type_arr = array(
     'id' => $type->id,
-    'name' => $type->name
+    'name' => $type->name,
+    'color' => $type->color
 );
 
 print_r(json_encode($type_arr));

@@ -28,7 +28,8 @@ $type = new Types($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-$type->name = $data->name; 
+$type->name = $data->name;
+$type->color = $data->color;
 
 if($type->create_one())
 {
