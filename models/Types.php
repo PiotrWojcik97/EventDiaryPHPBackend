@@ -92,7 +92,7 @@ class Types
     {
         $query = 
             "UPDATE types SET 
-                name = :name
+                name = :name,
                 color = :color
             WHERE
                 id = :id;";
