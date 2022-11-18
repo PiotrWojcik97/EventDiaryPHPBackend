@@ -28,7 +28,16 @@ $db = $database->connect();
 $event = new Events($db);
 $event_time = new EventsTime($db);
 
-$event->type_id = isset($_GET['type_id']) ? $_GET['type_id'] : die();
+if(!isset($_GET['type_id']))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter ?type_id not present')
+    );
+    die();
+}
+
+$event->type_id = $_GET['type_id'];
 
 $response = $event->read_id_by_type_id();
 
@@ -62,6 +71,7 @@ if($num_of_rows > 0)
 else
 {
     //no events
+    http_response_code(400);
     echo json_encode(
         array('message' => "No events Found")
     );

@@ -29,8 +29,17 @@ $type = new Types($db);
 
 $result = $type->read();
 
-// get ID from API call (e.g. read_single.php?id=3)
-$type->id = isset($_GET['id']) ? $_GET['id'] : die();
+
+if(!isset($_GET['id']))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter ?id not present')
+    );
+    die();
+}
+
+$type->id = $_GET['id'];
 
 $type->read_single();
 

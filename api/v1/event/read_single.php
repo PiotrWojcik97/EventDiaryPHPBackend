@@ -29,8 +29,16 @@ $event = new Events($db);
 
 $result = $event->read_without_image();
 
-// get ID from API call (e.g. read_single.php?id=3)
-$event->id = isset($_GET['id']) ? $_GET['id'] : die();
+if(!isset($_GET['id']))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter ?id not present')
+    );
+    die();
+}
+
+$event->id = $_GET['id'];
 
 $event->read_single();
 

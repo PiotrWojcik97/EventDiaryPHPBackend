@@ -26,17 +26,27 @@ $db = $database->connect();
 
 $type = new Types($db);
 
-$type->id = isset($_GET['id']) ? $_GET['id'] : die();
-
-if($type->delete())
+if(isset($_GET['id']))
 {
-    echo json_encode(
-        array('message' => 'type deleted')
-    );
+    $type->id = $_GET['id'];
+    if($type->delete())
+    {
+        echo json_encode(
+            array('message' => 'type deleted')
+        );
+    }
+    else
+    {
+        http_response_code(400);
+        echo json_encode(
+            array('message' => 'type not deleted')
+        );
+    }
 }
 else
 {
+    http_response_code(400);
     echo json_encode(
-        array('message' => 'type not deleted')
+        array('message' => 'no ?id given')
     );
 }

@@ -29,6 +29,23 @@ $events = new Events($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
+if(!isset($data->month))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :month not present')
+    );
+    die();
+}
+if(!isset($data->year))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :year not present')
+    );
+    die();
+}
+
 $result = $events->read_month($data->month, $data->year);
 
 $num_of_rows = $result->rowCount();

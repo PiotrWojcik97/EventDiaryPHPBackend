@@ -28,6 +28,31 @@ $user = new Users($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
+if(!isset($data->username))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :username not present')
+    );
+    die();
+}
+if(!isset($data->password))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :password not present')
+    );
+    die();
+}
+if(!isset($data->newPassword))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :newPassword not present')
+    );
+    die();
+}
+
 $user->read_user($data->username);
 
 if( $data->username == $user->username &&
@@ -42,6 +67,7 @@ if( $data->username == $user->username &&
 }
 else
 {
+    http_response_code(400);
     $reply = array(
         'res' => 'NOK',
     );

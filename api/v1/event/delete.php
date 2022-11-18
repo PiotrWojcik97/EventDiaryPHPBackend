@@ -28,8 +28,18 @@ $db = $database->connect();
 $event = new Events($db);
 $event_time = new EventsTime($db);
 
-$event->id = isset($_GET['id']) ? $_GET['id'] : die();
-$event_time->event_id = isset($_GET['id']) ? $_GET['id'] : die();
+if(!isset($_GET['id']))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter ?id not present')
+    );
+    die();
+}
+
+$event->id = $_GET['id'];
+$event_time->event_id = $_GET['id'];
+
 
 if($event_time->delete())
 {
@@ -41,6 +51,7 @@ if($event_time->delete())
     }
     else
     {
+        http_response_code(400);
         echo json_encode(
             array('message' => 'Event partially deleted')
         );
@@ -48,7 +59,8 @@ if($event_time->delete())
 }
 else
 {
+    http_response_code(400);
     echo json_encode(
-        array('message' => 'Event not deleted')
-    );
+            array('message' => 'Event not deleted')
+        );
 }

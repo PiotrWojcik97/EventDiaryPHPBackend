@@ -28,6 +28,23 @@ $type = new Types($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
+if(!isset($data->name))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :name not present')
+    );
+    die();
+}
+if(!isset($data->color))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :color not present')
+    );
+    die();
+}
+
 $type->name = $data->name;
 $type->color = $data->color;
 
@@ -39,6 +56,7 @@ if($type->create_one())
 }
 else
 {
+    http_response_code(400);
     echo json_encode(
         array('message' => 'type not created')
     );

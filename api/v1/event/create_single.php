@@ -30,6 +30,55 @@ $events_time = new EventsTime($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
+if(!isset($data->user_id))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :user_id not present')
+    );
+    die();
+}
+if(!isset($data->type_id))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :type_id not present')
+    );
+    die();
+}
+if(!isset($data->name))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :name not present')
+    );
+    die();
+}
+if(!isset($data->short_description))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :short_description not present')
+    );
+    die();
+}
+if(!isset($data->long_description))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :long_description not present')
+    );
+    die();
+}
+if(!isset($data->image_description))
+{
+    http_response_code(400);
+    echo json_encode(
+        array('message' => 'parameter :image_description not present')
+    );
+    die();
+}
+
 $event->user_id = $data->user_id; 
 $event->type_id = $data->type_id; 
 $event->name = $data->name; 
@@ -97,6 +146,7 @@ if($event->create_one())
 }
 else
 {
+    http_response_code(400);
     echo json_encode(
         array('message' => 'Event not created')
     );
