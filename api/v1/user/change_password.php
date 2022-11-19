@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ERROR | E_PARSE);
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
@@ -56,9 +58,9 @@ if(!isset($data->newPassword))
 $user->read_user($data->username);
 
 if( $data->username == $user->username &&
-    $data->password == $user->password)
+    password_verify($data->password, $user->password))
 {
-    $user->password = $data->newPassword;
+    $user->password = password_hash($data->newPassword, PASSWORD_DEFAULT);
     $user->update();
     
     $reply = array(

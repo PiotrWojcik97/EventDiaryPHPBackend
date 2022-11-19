@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ERROR | E_PARSE);
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
@@ -48,8 +50,8 @@ if(!isset($data->password))
 
 $user->read_user($data->username);
 
-if( $data->username == $user->username &&
-    $data->password == $user->password)
+if( password_verify($data->password, $user->password) &&
+    $data->username == $user->username)
 {
     $headers = array('alg'=>'HS256','typ'=>'JWT');
 	$payload = array('username'=>$user->username, 'exp'=>(time() + 86400)); // valid for one day

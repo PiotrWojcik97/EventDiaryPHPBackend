@@ -64,7 +64,7 @@ $query =
         '5', 
         'Face Yoga',
         'I''m attending yoga-face classes.',
-        'My face will look beautiful after that classes.', 
+        'I''be doing so many face exercises there.', 
         '$image_woman_content',
         'woman with odd face expression');";
 
