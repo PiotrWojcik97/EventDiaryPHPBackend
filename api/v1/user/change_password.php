@@ -69,7 +69,6 @@ if( $data->username == $user->username &&
 }
 else
 {
-    http_response_code(400);
     $reply = array(
         'res' => 'NOK',
     );
