@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 include_once '../../../config/Database.php';
 include_once '../../../models/Users.php';
+include_once '../../../utils/jwt_handler.php';
 
 $database = new Database();
 $db = $database->connect();
@@ -50,8 +51,13 @@ $user->read_user($data->username);
 if( $data->username == $user->username &&
     $data->password == $user->password)
 {
+    $headers = array('alg'=>'HS256','typ'=>'JWT');
+	$payload = array('username'=>$user->username, 'exp'=>(time() + 86400)); // valid for one day
+    $jwt = generate_jwt($headers, $payload);
+
     $reply = array(
         'res' => 'OK',
+        'token' => $jwt
     );
 }
 else

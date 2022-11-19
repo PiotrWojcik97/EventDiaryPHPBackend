@@ -20,6 +20,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 include_once '../../../config/Database.php';
 include_once '../../../models/Types.php';
+include_once '../../../utils/jwt_handler.php';
+
+$bearer_token = get_bearer_token();
+
+if(!$bearer_token)
+{
+    http_response_code(401);
+    echo json_encode(
+        array('message' => 'no JWT token provided, Unauthorized')
+    );
+    die();
+}
+
+$is_jwt_valid = is_jwt_valid($bearer_token);
+
+if(!$is_jwt_valid)
+{
+    http_response_code(401);
+    echo json_encode(
+        array('message' => 'Invalid JWT token, Unauthorized')
+    );
+    die();
+}
 
 $database = new Database();
 $db = $database->connect();
