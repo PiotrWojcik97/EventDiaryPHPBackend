@@ -2,10 +2,13 @@
 
 class Database
 {
-    private $host = 'localhost';
+    // private $host = 'localhost';
+    private $host = 'eventdiarydb.mysql.database.azure.com';
     private $db_name = 'event_diary';
-    private $username = 'root';
-    private $password = '#21Gasdejr';
+    // private $username = 'root';
+    private $username = 'eventdiary';
+    // private $password = '#21Gasdejr';
+    private $password = 'MyCoolPass1!';
     private $conn;
 
     public function connect()
