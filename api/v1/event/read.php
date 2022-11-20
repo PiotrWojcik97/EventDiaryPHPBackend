@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @OA\Get(
+ *     path="/api/v1/event/read.php",
+ *     summary="Get all events table (not used in frontend)",
+ *     tags={"Events"},
+ *     @OA\Response(response="200", description="Positive response")
+ * )
+ */
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
@@ -43,11 +52,10 @@ if($num_of_rows > 0)
             'id' => $id,
             'user_id' => $user_id, 
             'type_id' => $type_id, 
-            'name' => $name, 
-            'start_time' => $start_time, 
-            'end_time' => $end_time, 
+            'name' => $name,
             'short_description' => $short_description, 
-            'long_description' => $long_description);
+            'long_description' => $long_description,
+            'image_description' => $image_description);
 
         array_push($events_arr['data'], $user_item);
     }

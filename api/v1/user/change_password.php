@@ -1,5 +1,37 @@
 <?php
 
+/**
+ * @OA\Post(
+ *     path="/api/v1/user/change_password.php",
+ *     summary="Changes user password",
+ *     tags={"Users"},
+ *     @OA\RequestBody(
+ *          @OA\MediaType(
+ *              mediaType="json",
+ *              @OA\Schema(
+ *                  @OA\Property(
+ *                      property="username",
+ *                      type="string",
+ *                      example="admin"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="password",
+ *                      type="string",
+ *                      example="admin"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="newPassword",
+ *                      type="string",
+ *                      example="admin"
+ *                  ),
+ *              )
+ *          )
+ *     ),
+ *     @OA\Response(response="200", description="Positive response"),
+ *     @OA\Response(response="400", description="Bad request, no needed parameters specified"),
+ * )
+ */
+
 error_reporting(E_ERROR | E_PARSE);
 
 if (isset($_SERVER['HTTP_ORIGIN'])) {

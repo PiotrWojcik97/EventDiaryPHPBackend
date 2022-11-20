@@ -1,5 +1,69 @@
 <?php
 
+/**
+ * @OA\Put(
+ *     path="/api/v1/event/update.php",
+ *     summary="Updates event",
+ *     tags={"Events"},
+ *     @OA\RequestBody(
+ *          @OA\MediaType(
+ *              mediaType="json",
+ *              @OA\Schema(
+ *                  @OA\Property(
+ *                      property="id",
+ *                      type="integer",
+ *                      example="4"
+ *                  ),
+ *                   @OA\Property(
+ *                      property="user_id",
+ *                      type="integer",
+ *                      example="4"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="type_id",
+ *                      type="integer",
+ *                      example="3"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="name",
+ *                      type="string",
+ *                      example="Party"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="short_description",
+ *                      type="string",
+ *                      example="Party at my house"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="long_description",
+ *                      type="string",
+ *                      example="Party at my house at 7 p.m."
+ *                  ),
+ *                  @OA\Property(
+ *                      property="image_description",
+ *                      type="string",
+ *                      example="Party image"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="start_time",
+ *                      type="string",
+ *                      format="date-time"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="end_time",
+ *                      type="string",
+ *                      format="date-time"
+ *                  )
+ *              )
+ *          )
+ *     ),
+ *     @OA\Response(response="200", description="Positive response"),
+ *     @OA\Response(response="401", description="Authentication error, no JWT token provided"),
+ *     @OA\Response(response="400", description="Bad request, no needed parameters specified"),
+ *     security={{"bearerToken": {}}}
+ * )
+ */
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');

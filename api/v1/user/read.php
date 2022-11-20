@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @OA\Get(
+ *     path="/api/v1/user/read.php",
+ *     summary="Get all users table",
+ *     tags={"Users"},
+ *     @OA\Response(response="200", description="Positive response")
+ * )
+ */
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');

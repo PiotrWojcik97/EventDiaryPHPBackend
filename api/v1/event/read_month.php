@@ -1,5 +1,32 @@
 <?php
 
+/**
+ * @OA\Post(
+ *     path="/api/v1/event/read_month.php",
+ *     summary="Reads events in current month. Month from 1 to 12",
+ *     tags={"Events"},
+ *     @OA\RequestBody(
+ *          @OA\MediaType(
+ *              mediaType="json",
+ *              @OA\Schema(
+ *                  @OA\Property(
+ *                      property="month",
+ *                      type="integer"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="year",
+ *                      type="integer"
+ *                  )
+ *              )
+ *          )
+ *     ),
+ *     @OA\Response(response="200", description="Positive response"),
+ *     @OA\Response(response="401", description="Authentication error, no JWT token provided"),
+ *     @OA\Response(response="400", description="Bad request, no needed parameters specified")
+ * )
+ */
+
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');

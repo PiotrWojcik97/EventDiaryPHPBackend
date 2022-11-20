@@ -26,9 +26,7 @@ class Events
                 id,
                 user_id, 
                 type_id, 
-                name, 
-                start_time, 
-                end_time, 
+                name,
                 short_description, 
                 long_description,
                 image_description
@@ -39,7 +37,7 @@ class Events
 
         return $stmt;
     }
-
+    
     public function read_id_by_type_id()
     {
         $query = 

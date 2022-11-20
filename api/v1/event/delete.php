@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * @OA\Delete(
+ *     path="/api/v1/event/delete.php",
+ *     summary="Delete event by given id",
+ *     tags={"Events"},
+ *     @OA\Parameter(
+ *          name="id",
+ *          in="query",
+ *          required=true,
+ *          description="id of event",
+ *          @OA\Schema(
+ *              type="integer"
+ *          ),
+ *     ),
+ *     @OA\Response(response="200", description="Positive response"),
+ *     @OA\Response(response="401", description="Authentication error, no JWT token provided"),
+ *     @OA\Response(response="400", description="Bad request, no needed parameters specified"),
+ *     security={{"bearerToken": {}}}
+ * )
+ */
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');

@@ -1,5 +1,25 @@
 <?php
 
+/**
+ * @OA\Post(
+ *     path="/api/v1/type/read_single.php",
+ *     summary="Reads single type by given id (not used in front end)",
+ *     tags={"Types"},
+ *     @OA\Parameter(
+ *          name="id",
+ *          in="query",
+ *          required=true,
+ *          description="id of event",
+ *          @OA\Schema(
+ *              type="integer"
+ *          ),
+ *     ),
+ *     @OA\Response(response="200", description="Positive response"),
+ *     @OA\Response(response="400", description="Bad request, no needed parameters specified"),
+ * )
+ */
+
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');

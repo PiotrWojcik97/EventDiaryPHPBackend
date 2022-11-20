@@ -1,5 +1,35 @@
 <?php
 
+/**
+ * @OA\Post(
+ *     path="/api/v1/type/create_single.php",
+ *     summary="Create new type",
+ *     tags={"Types"},
+ *     @OA\RequestBody(
+ *          @OA\MediaType(
+ *              mediaType="json",
+ *              @OA\Schema(
+ *                  @OA\Property(
+ *                      property="name",
+ *                      type="string",
+ *                      example="work"
+ *                  ),
+ *                  @OA\Property(
+ *                      property="color",
+ *                      type="string",
+ *                      example="#A79AFF9F"
+ *                  )
+ *              )
+ *          )
+ *     ),
+ *     @OA\Response(response="200", description="Positive response"),
+ *     @OA\Response(response="401", description="Authentication error, no JWT token provided"),
+ *     @OA\Response(response="400", description="Bad request, no needed parameters specified"),
+ *     security={{"bearerToken": {}}}
+ * )
+ */
+
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
