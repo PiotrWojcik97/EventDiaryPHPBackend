@@ -18,6 +18,8 @@ Project was developed under windows 10. To set up the project follow below steps
 1. In VS Code right click somewhere in php file.
 2. click in showed options: "PHP Server: Serve project"
 3. after finishing of testing PHP do the same however with: "PHP Server: Stop server".
+**Important note**
+MySQL server is required to be also run for full functionality.
 
 ## How to configure local environment
 
