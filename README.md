@@ -32,8 +32,9 @@ MySQL server is required to be also run for full functionality.
 
 1. Set up your local environment (How to configure local environment)
 2. install composer globally on your computer and add it to path
-3. run php server for project (How to launch project on PHP server)
-4. run Swagger in the browser PHP_server_address:PHP_server_port/doc e.g. http://localhost:3000/doc
+3. install composer components mentioned in composer.json file
+4. run php server for project (How to launch project on PHP server)
+5. run Swagger in the browser PHP_server_address:PHP_server_port/doc e.g. http://localhost:3000/doc
 
 **Important Note**
 - Some HTTP requests will not work in Swagger without JWT token specified in HTTP Header.
